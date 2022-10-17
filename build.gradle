@@ -1,0 +1,28 @@
+plugins {
+    id 'org.springframework.boot' version '2.7.4'
+    id 'io.spring.dependency-management' version '1.0.14.RELEASE'
+    id 'java'
+}
+
+group = 'com.symverse'
+version = '0.0.1-SNAPSHOT'
+sourceCompatibility = '1.8'
+
+repositories {
+    mavenCentral()
+}
+
+dependencies {
+    implementation 'org.springframework.boot:spring-boot-starter'
+
+    // sym-web3j required libraries
+    implementation fileTree(dir:'libs/', include:'*.jar')
+
+    implementation 'com.google.code.gson:gson:2.9.0'
+    testImplementation 'org.springframework.boot:spring-boot-starter-test'
+
+}
+
+tasks.named('test') {
+    useJUnitPlatform()
+}
