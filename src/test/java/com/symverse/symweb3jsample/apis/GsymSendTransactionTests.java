@@ -27,7 +27,7 @@ public class GsymSendTransactionTests extends RPCTestContainer {
     private WalletFile walletFile;
 
     @Test
-    @DisplayName("send Transaction Test")
+    @DisplayName("일반 트랜잭션 전송")
     public void testSendTransaction() throws IOException, CipherException {
 
         // keystore load
@@ -36,7 +36,7 @@ public class GsymSendTransactionTests extends RPCTestContainer {
         walletFile = objectMapper.convertValue(keyStoreMap, WalletFile.class);
         Credentials credentials = Credentials.create(Wallet.decrypt("FgCdAb2YzVwur", walletFile));
 
-        // get nonce by symId 
+        // symid nonce 값 구하기
         SymGetTransactionCount nonce = gSymWeb3j.symGetTransactionCount(walletFile.getSymId(), DefaultBlockParameterName.PENDING).send();
 
 
@@ -52,14 +52,14 @@ public class GsymSendTransactionTests extends RPCTestContainer {
         SymSendRawTransaction symSendRawTransaction = gSymWeb3j.symSendRawTransaction(rawTransaction.hexSignMessage()).send();
 
         if ( symSendRawTransaction.hasError()){
-            // error process
+            //에러처리
         }
 
         System.out.println(symSendRawTransaction.getTransactionHash());
     }
 
     @Test
-    @DisplayName("send SCT20 Transaction Test")
+    @DisplayName("SCT20 생성")
     public void testSendSct() throws IOException, CipherException {
 
         // keystore load
@@ -68,7 +68,7 @@ public class GsymSendTransactionTests extends RPCTestContainer {
         walletFile = objectMapper.convertValue(keyStoreMap, WalletFile.class);
         Credentials credentials = Credentials.create(Wallet.decrypt("FgCdAb2YzVwur", walletFile));
 
-        // get nonce by symId 
+        // symid nonce 값 구하기
         SymGetTransactionCount nonce = gSymWeb3j.symGetTransactionCount(walletFile.getSymId(), DefaultBlockParameterName.PENDING).send();
 
         new Sct.Sct21Maker().create("SYMVERSE", "SYM", SymUtil.toSym(1000), BigInteger.ZERO, walletFile.getSymId());
@@ -88,7 +88,7 @@ public class GsymSendTransactionTests extends RPCTestContainer {
     }
 
     @Test
-    @DisplayName("send SCT30 Transaction Test")
+    @DisplayName("SCT30 생성")
     public void testSendSct30() throws IOException, CipherException {
 
         // keystore load
@@ -97,7 +97,7 @@ public class GsymSendTransactionTests extends RPCTestContainer {
         walletFile = objectMapper.convertValue(keyStoreMap, WalletFile.class);
         Credentials credentials = Credentials.create(Wallet.decrypt("FgCdAb2YzVwur", walletFile));
 
-        // get nonce by symId 
+        // symid nonce 값 구하기
         SymGetTransactionCount nonce = gSymWeb3j.symGetTransactionCount(walletFile.getSymId(), DefaultBlockParameterName.PENDING).send();
 
         // sct transaction
